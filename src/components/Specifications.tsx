@@ -18,7 +18,7 @@ type Props = {
 
 function Specifications({ specification }: Props) {
   return (
-    <Paper elevation={12}>
+    <Paper>
       <Typography variant="h4">Specifications</Typography>
       <TableContainer>
         <Table>

@@ -9,7 +9,7 @@ type Props = {
 
 function ItemsIncluded({ items }: Props) {
   return (
-    <Paper elevation={12}>
+    <Paper>
       <Typography variant="h4">Items Included</Typography>
       <List dense>
         {items.map(item => (

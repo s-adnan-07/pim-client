@@ -15,7 +15,7 @@ const arr = ['EndUser', 'Maintive', 'ToolSelect']
 
 function Price({ price }: Props) {
   return (
-    <Paper elevation={12}>
+    <Paper>
       <Typography variant="h4">Prices</Typography>
       <List>
         {arr.map(item => (
