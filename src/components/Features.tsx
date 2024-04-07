@@ -1,11 +1,11 @@
-import ListItem from '@mui/material/ListItem'
-import List from '@mui/material/List'
 import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import PaperHeader from '../ui/PaperHeader'
 
 type Props = {
   features: string[]
 }
+
+const toClipBoard = (features: string[]) => features.join('\r\n')
 
 // Note:
 // > We can use <ul> and <li> instead of the list components
@@ -13,13 +13,13 @@ type Props = {
 
 function Features({ features }: Props) {
   return (
-    <Paper elevation={12}>
-      <Typography variant="h4">Features</Typography>
-      <List dense>
+    <Paper sx={{ paddingBottom: 2 }}>
+      <PaperHeader content={toClipBoard(features)}>Features</PaperHeader>
+      <ul>
         {features.map(feature => (
-          <ListItem>{feature}</ListItem>
+          <li>{feature}</li>
         ))}
-      </List>
+      </ul>
     </Paper>
   )
 }

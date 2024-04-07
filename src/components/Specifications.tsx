@@ -1,11 +1,11 @@
 import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
 import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
 import TableBody from '@mui/material/TableBody'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Table from '@mui/material/Table'
+
+import PaperHeader from '../ui/PaperHeader'
 
 type Props = {
   specification: {
@@ -16,18 +16,18 @@ type Props = {
   }[]
 }
 
+// Todo: Need to make the below function more readable
+const getSpecs = ({ specification }: Props) =>
+  specification.map(s => `${s.attribute}\t${s.value}`).join('\r\n')
+
 function Specifications({ specification }: Props) {
   return (
-    <Paper>
-      <Typography variant="h4">Specifications</Typography>
+    <Paper sx={{}}>
+      <PaperHeader content={getSpecs({ specification })}>
+        Specifications
+      </PaperHeader>
       <TableContainer>
         <Table>
-          {/* <TableHead>
-            <TableRow>
-              <TableCell align="center">Attribute</TableCell>
-              <TableCell align="center">Value</TableCell>
-            </TableRow>
-          </TableHead> */}
           <TableBody>
             {specification.map(spec => (
               <TableRow>

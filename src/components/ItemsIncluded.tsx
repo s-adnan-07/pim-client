@@ -1,21 +1,21 @@
-import ListItem from '@mui/material/ListItem'
-import List from '@mui/material/List'
 import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import PaperHeader from '../ui/PaperHeader'
 
 type Props = {
   items: string[]
 }
 
+const toClipBoard = (items: string[]) => items.join('\r\n')
+
 function ItemsIncluded({ items }: Props) {
   return (
-    <Paper>
-      <Typography variant="h4">Items Included</Typography>
-      <List dense>
+    <Paper sx={{}}>
+      <PaperHeader content={toClipBoard(items)}>Items Included</PaperHeader>
+      <ul>
         {items.map(item => (
-          <ListItem>{item}</ListItem>
+          <li>{item}</li>
         ))}
-      </List>
+      </ul>
     </Paper>
   )
 }
