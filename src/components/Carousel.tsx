@@ -7,14 +7,15 @@ type Props = {
 
 function Carousel({ images }: Props) {
   return (
-    <Paper>
+    <Paper sx={{ py: 3 }}>
       <Stack
         direction="row"
         spacing={3}
+        sx={{ ml: 3, overflow: ' hidden' }}
         // sx={{ display: 'flex', justifyContent: 'space-around' }}
       >
         {images.map(img => (
-          <img src={img.url} height={250} />
+          <img src={img.url} height={252} />
         ))}
       </Stack>
     </Paper>
