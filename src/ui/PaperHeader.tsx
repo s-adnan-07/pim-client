@@ -35,17 +35,21 @@ function PaperHeader({ content, children }: Props) {
   return (
     <Box
       bgcolor="teal"
-      padding={1}
+      paddingY={1}
+      paddingX={1.5}
       borderRadius={1}
       sx={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
+      alignItems="center"
     >
-      <Typography variant="h4">{children}</Typography>
+      <Typography variant="h5">{children}</Typography>
+
       <IconButton onClick={handleClick}>
         <ContentPasteIcon fontSize="small" />
       </IconButton>
+
       <Snackbar
         open={open}
         autoHideDuration={2000}
