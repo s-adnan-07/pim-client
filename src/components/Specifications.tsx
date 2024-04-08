@@ -1,11 +1,9 @@
 import Paper from '@mui/material/Paper'
-import TableContainer from '@mui/material/TableContainer'
-import TableBody from '@mui/material/TableBody'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
-import Table from '@mui/material/Table'
 
 import PaperHeader from '../ui/PaperHeader'
+import TableWrapper from '../ui/TableWrapper'
 
 type Props = {
   specification: {
@@ -26,18 +24,18 @@ function Specifications({ specification }: Props) {
       <PaperHeader content={getSpecs({ specification })}>
         Specifications
       </PaperHeader>
-      <TableContainer>
-        <Table>
-          <TableBody>
-            {specification.map(spec => (
-              <TableRow>
-                <TableCell>{spec.attribute}</TableCell>
-                <TableCell>{spec.value}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <TableWrapper>
+        {specification.map(spec => (
+          <TableRow
+            sx={{
+              '&:last-child td, &:last-child th': { borderBottom: 0 },
+            }}
+          >
+            <TableCell align="center">{spec.attribute}</TableCell>
+            <TableCell align="center">{spec.value}</TableCell>
+          </TableRow>
+        ))}
+      </TableWrapper>
     </Paper>
   )
 }
