@@ -13,7 +13,9 @@ function Title({ brand, model, searchTitle }: Props) {
       <Typography variant="h6" component="p" align="center">
         {brand} {model}
       </Typography>
-      <Typography variant="h4">{searchTitle}</Typography>
+      <Typography variant="h4" align="justify">
+        {searchTitle}
+      </Typography>
     </Paper>
   )
 }

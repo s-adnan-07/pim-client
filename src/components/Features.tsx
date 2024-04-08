@@ -13,7 +13,7 @@ const toClipBoard = (features: string[]) => features.join('\r\n')
 
 function Features({ features }: Props) {
   return (
-    <Paper sx={{ paddingBottom: 2 }}>
+    <Paper sx={{ paddingBottom: 1 }}>
       <PaperHeader content={toClipBoard(features)}>Features</PaperHeader>
       <ul>
         {features.map(feature => (
