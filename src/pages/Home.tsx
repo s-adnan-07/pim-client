@@ -8,8 +8,11 @@ import ItemsIncluded from '../components/ItemsIncluded'
 import Prices from '../components/Prices'
 import Title from '../components/Title'
 import GridStack from '../ui/GridStack'
+import Dimensions from '../components/Dimensions'
 
 type Props = {}
+
+// TODO: Need to reduce container size, a value between 'xl' and 'lg'
 
 function Home({}: Props) {
   const {
@@ -21,10 +24,11 @@ function Home({}: Props) {
     specification,
     price,
     whats_included,
+    package_dimension,
   } = product
 
   return (
-    <Grid container spacing={2} py={2}>
+    <Grid container spacing={3} py={3}>
       <GridStack>
         <Title model={model} brand={brand} searchTitle={searchTitle} />
         <Carousel images={s3Images} />
@@ -38,6 +42,7 @@ function Home({}: Props) {
       <GridStack md={4}>
         <Prices price={price} />
         <ItemsIncluded items={whats_included} />
+        <Dimensions package_dimension={package_dimension} />
       </GridStack>
     </Grid>
   )
