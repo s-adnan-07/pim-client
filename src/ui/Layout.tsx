@@ -9,7 +9,7 @@ function Layout({ children }: Props) {
   return (
     <>
       <Navbar />
-      <Container maxWidth="xl">{children}</Container>
+      <Container maxWidth="lg">{children}</Container>
     </>
   )
 }
