@@ -8,7 +8,9 @@ type Props = {
   lg?: number
   xl?: number
   spacing?: number
-  children?: any
+
+  // Children are optional so that we can use empty component to give spacing
+  children?: React.ReactNode
 }
 
 function GridStack({ xs, sm, md, lg, xl, spacing, children }: Props) {

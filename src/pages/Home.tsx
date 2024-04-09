@@ -12,7 +12,7 @@ import Dimensions from '../components/Dimensions'
 
 type Props = {}
 
-// TODO: Need to reduce container size, a value between 'xl' and 'lg'
+// // TODO: Need to reduce container size, a value between 'xl' and 'lg'
 
 function Home({}: Props) {
   const {

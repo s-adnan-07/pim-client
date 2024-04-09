@@ -12,7 +12,7 @@ type Props = {
    * Content to be copied to clipboard on button click.
    */
   content?: string
-  children?: any
+  children: React.ReactNode
 }
 
 function PaperHeader({ content, children }: Props) {
