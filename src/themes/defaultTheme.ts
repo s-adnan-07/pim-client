@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+import { blueGrey, teal } from '@mui/material/colors'
 
 const defaultTheme = createTheme({
   components: {
@@ -10,12 +11,12 @@ const defaultTheme = createTheme({
 
 export const darkTheme = createTheme({
   ...defaultTheme,
-  palette: { mode: 'dark' },
+  palette: { mode: 'dark', primary: teal },
 })
 
 export const lightTheme = createTheme({
   ...defaultTheme,
-  palette: { mode: 'light' },
+  palette: { mode: 'light', primary: blueGrey },
 })
 
 export default defaultTheme
