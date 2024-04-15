@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell'
 
 import PaperHeader from '../ui/PaperHeader'
 import TableWrapper from '../ui/TableWrapper'
+import addSeperators from '../utils/addSeperators'
 
 type Props = {
   price: {
@@ -33,9 +34,8 @@ function Prices({ price }: Props) {
               '&:last-child td, &:last-child th': { borderBottom: 0 },
             }}
           >
-            <TableCell>{key}</TableCell>
-            <TableCell>{value}</TableCell>
-            <TableCell>AED</TableCell>
+            <TableCell align="center">{key}</TableCell>
+            <TableCell align="center">{addSeperators(value)} AED</TableCell>
           </TableRow>
         ))}
       </TableWrapper>
