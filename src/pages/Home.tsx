@@ -25,12 +25,18 @@ function Home({}: Props) {
     price,
     whats_included,
     package_dimension,
+    category,
   } = product
 
   return (
     <Grid container spacing={3} py={3}>
       <GridStack>
-        <Title model={model} brand={brand} searchTitle={searchTitle} />
+        <Title
+          model={model}
+          brand={brand}
+          searchTitle={searchTitle}
+          category={category}
+        />
         <Carousel images={s3Images} />
       </GridStack>
 
