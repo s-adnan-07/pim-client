@@ -4,6 +4,7 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 
 import TableWrapper from '../ui/TableWrapper'
+import capitalize from '../utils/capitalize'
 
 type Props = {
   package_dimension: {
@@ -39,9 +40,8 @@ function Dimensions({ package_dimension }: Props) {
               '&:last-child td, &:last-child th': { borderBottom: 0 },
             }}
           >
-            <TableCell>{key}</TableCell>
-            <TableCell>{value}</TableCell>
-            <TableCell>cm</TableCell>
+            <TableCell align="center">{capitalize(key)}</TableCell>
+            <TableCell align="center">{value} cm</TableCell>
           </TableRow>
         ))}
       </TableWrapper>
