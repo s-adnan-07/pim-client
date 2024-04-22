@@ -1,11 +1,10 @@
-import { useState } from 'react'
-
 import Typography from '@mui/material/Typography'
 import ContentPasteIcon from '@mui/icons-material/ContentPaste'
 import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar'
+import Snackbar from '@mui/material/Snackbar'
 import { useTheme } from '@mui/material'
+import useSnackBar from '../hooks/useSnackBar'
 
 type Props = {
   /**
@@ -16,23 +15,8 @@ type Props = {
 }
 
 function PaperHeader({ content, children }: Props) {
-  const [open, setOpen] = useState(false)
   const { palette } = useTheme()
-
-  function handleClick() {
-    if (!content) return
-
-    navigator.clipboard.writeText(content)
-    setOpen(true)
-  }
-
-  function handleClose(
-    e: React.SyntheticEvent | Event,
-    reason: SnackbarCloseReason,
-  ) {
-    if (reason === 'clickaway') return
-    setOpen(false)
-  }
+  const { open, handleClick, handleClose } = useSnackBar(content)
 
   return (
     <Box
