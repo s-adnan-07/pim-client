@@ -4,14 +4,14 @@ import './App.css'
 
 import Layout from './ui/Layout'
 import Home from './pages/Home'
-import Search from './pages/Search'
+import SearchPage from './pages/SearchPage'
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/product/:itemId" element={<Home />} />
+        <Route path="/" element={<SearchPage />} />
       </Routes>
     </Layout>
   )
