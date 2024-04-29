@@ -10,11 +10,15 @@ type Props = {
   model: string
   searchTitle: string
   category: Category[]
+  soloCategory: Category
 }
 
-function Title({ brand, model, searchTitle, category }: Props) {
+function Title({ brand, model, searchTitle, category, soloCategory }: Props) {
   // Dumb cookie monster put category field as an array of documents 🤦‍♂️
   // Therefore I have to extract the category document from the array with type assertion
+
+  // *UPDATE: I can modify my controller in the backend to send category as a single object
+  // TODO: Implement the above
 
   // Note: Since app is in strict mode the below line runs twice and throws an error
   // > more specifically the pop function runs twice, and in the second render
@@ -22,7 +26,8 @@ function Title({ brand, model, searchTitle, category }: Props) {
   // const { breadCrumbs } = category.pop() as Category
 
   // Workaround -> even if the below line runs twice, it still takes the first element from the array
-  const [{ breadCrumbs }] = category
+  // const [{ breadCrumbs }] = category
+  const { breadCrumbs } = soloCategory
   const categories = breadCrumbs.replace(/^\//, '').split('/')
 
   return (
