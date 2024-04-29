@@ -7,7 +7,7 @@ import TableWrapper from '../ui/TableWrapper'
 
 type Props = {
   specification: {
-    _id: any
+    _id?: any
     attribute: string
     value: string | number
     filter?: boolean
