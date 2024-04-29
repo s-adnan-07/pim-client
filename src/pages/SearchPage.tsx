@@ -1,8 +1,6 @@
-import { useState } from 'react'
-
 import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar'
+import Snackbar from '@mui/material/Snackbar'
 
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
