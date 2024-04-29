@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Unstable_Grid2'
 
-import product from '../assets/product'
+import product from '../assets/hydratedProduct'
 import Carousel from '../components/Carousel'
 import Features from '../components/Features'
 import Specifications from '../components/Specifications'
@@ -9,12 +9,15 @@ import Prices from '../components/Prices'
 import Title from '../components/Title'
 import GridStack from '../ui/GridStack'
 import Dimensions from '../components/Dimensions'
+import useProduct from '../hooks/useProduct'
 
 type Props = {}
 
 // // TODO: Need to reduce container size, a value between 'xl' and 'lg'
 
 function Home({}: Props) {
+  const { prod } = useProduct()
+
   const {
     model,
     brand,
@@ -26,7 +29,8 @@ function Home({}: Props) {
     whats_included,
     package_dimension,
     category,
-  } = product
+    soloCategory,
+  } = prod
 
   return (
     <Grid container spacing={3} py={3}>
@@ -36,6 +40,7 @@ function Home({}: Props) {
           brand={brand}
           searchTitle={searchTitle}
           category={category}
+          soloCategory={soloCategory}
         />
         <Carousel images={s3Images} />
       </GridStack>
