@@ -1,0 +1,8 @@
+version: '3'
+services:
+  pim-client:
+    container_name: pim-client
+    build: ./
+    ports:
+      - '8080:80'
+    restart: always

@@ -1,0 +1,15 @@
+# Directories
+node_modules
+dist
+.git
+.vscode
+
+# Files
+*.md
+.env
+.gitignore
+.prettierrc
+.prettierignore
+.dockerignore
+.eslintrc.js
+Dockerfile
