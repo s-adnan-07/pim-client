@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Product from '../assets/product.model'
 import hydratedProduct from '../assets/hydratedProduct'
+import { SERVER_PORT } from '@/constants/constants'
 
 interface ProductResponse {
   status: number
@@ -17,7 +18,7 @@ function useProduct() {
   useEffect(() => {
     axios
       .get<ProductResponse>(
-        `http://localhost:42069/products/by-id/${params.itemId}`,
+        `http://localhost:${SERVER_PORT}/products/by-id/${params.itemId}`,
       )
       .then(result => setProd(result.data.product))
       .catch(e => e)
