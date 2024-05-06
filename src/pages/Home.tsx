@@ -1,15 +1,16 @@
 import Grid from '@mui/material/Unstable_Grid2'
 
-import product from '../assets/hydratedProduct'
-import Carousel from '../components/Carousel'
-import Features from '../components/Features'
-import Specifications from '../components/Specifications'
-import ItemsIncluded from '../components/ItemsIncluded'
-import Prices from '../components/Prices'
-import Title from '../components/Title'
-import GridStack from '../ui/GridStack'
-import Dimensions from '../components/Dimensions'
-import useProduct from '../hooks/useProduct'
+import product from '@/assets/hydratedProduct'
+import Carousel from '@/components/Carousel'
+import Features from '@/components/Features'
+import Specifications from '@/components/Specifications'
+import ItemsIncluded from '@/components/ItemsIncluded'
+import Prices from '@/components/Prices'
+import Title from '@/components/Title'
+import GridStack from '@/ui/GridStack'
+import Dimensions from '@/components/Dimensions'
+import useProduct from '@/hooks/useProduct'
+import Stocks from '@/components/Stocks'
 
 type Props = {}
 
@@ -30,6 +31,7 @@ function Home({}: Props) {
     package_dimension,
     category,
     soloCategory,
+    stocks,
   } = prod
 
   return (
@@ -53,6 +55,7 @@ function Home({}: Props) {
       <GridStack md={4}>
         <Prices price={price} />
         <ItemsIncluded items={whats_included} />
+        <Stocks stocks={stocks} />
         <Dimensions package_dimension={package_dimension} />
       </GridStack>
     </Grid>
