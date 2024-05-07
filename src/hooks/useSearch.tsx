@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { BaseProduct } from '../assets/product.model'
+import { BaseProduct } from '@/types/product.model'
 import { SnackbarCloseReason } from '@mui/material/Snackbar'
 import { SERVER_PORT } from '@/constants/constants'
 

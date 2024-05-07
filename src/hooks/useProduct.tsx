@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import Product from '../assets/product.model'
-import hydratedProduct from '../assets/hydratedProduct'
+import Product from '@/types/product.model'
+import hydratedProduct from '@/assets/hydratedProduct'
 import { SERVER_PORT } from '@/constants/constants'
 
 interface ProductResponse {

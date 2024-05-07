@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 
-import { Stock } from '@/assets/product.model'
+import { Stock } from '@/types/product.model'
 import PaperHeader from '@/ui/PaperHeader'
 import TableWrapper from '@/ui/TableWrapper'
 
