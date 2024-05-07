@@ -1,4 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2'
+import Skeleton from '@mui/material/Skeleton'
 
 // import product from '@/assets/hydratedProduct'
 import Carousel from '@/components/Carousel'
@@ -17,7 +18,9 @@ type Props = {}
 // // TODO: Need to reduce container size, a value between 'xl' and 'lg'
 
 function Home({}: Props) {
-  const { prod } = useProduct()
+  const { prod, loading } = useProduct()
+
+  if (!prod) return <div>Product Not Found</div>
 
   const {
     model,
@@ -34,7 +37,14 @@ function Home({}: Props) {
     stocks,
   } = prod
 
-  return (
+  return loading ? (
+    <Grid container spacing={3} py={3}>
+      <GridStack>
+        <Skeleton variant="rectangular" height="20vh" />
+        <Skeleton variant="rectangular" height="55vh" />
+      </GridStack>
+    </Grid>
+  ) : (
     <Grid container spacing={3} py={3}>
       <GridStack>
         <Title

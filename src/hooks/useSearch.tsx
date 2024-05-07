@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { BaseProduct } from '@/types/product.model'
 import { SnackbarCloseReason } from '@mui/material/Snackbar'
-import { SERVER_PORT } from '@/constants/constants'
+import { VITE_SERVER_URL } from '@/constants/constants'
 
 interface BaseProductResponse {
   status: number
@@ -24,7 +24,7 @@ function useSearch() {
   async function getBaseProduct() {
     try {
       const { data } = await axios.post<BaseProductResponse>(
-        `http://localhost:${SERVER_PORT}/products/base`,
+        `${VITE_SERVER_URL}/products/base`,
         { model },
       )
 

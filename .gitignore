@@ -23,3 +23,5 @@ assets
 *.njsproj
 *.sln
 *.sw?
+
+.env*
