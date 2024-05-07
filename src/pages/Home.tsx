@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Unstable_Grid2'
 
-import product from '@/assets/hydratedProduct'
+// import product from '@/assets/hydratedProduct'
 import Carousel from '@/components/Carousel'
 import Features from '@/components/Features'
 import Specifications from '@/components/Specifications'
