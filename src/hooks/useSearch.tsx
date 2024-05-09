@@ -22,6 +22,9 @@ function useSearch() {
   const [open, setOpen] = useState(false)
 
   async function getBaseProduct() {
+    // Prevent API call if model entered isn't changed
+    if (baseProduct?.model === model) return
+
     try {
       const { data } = await axios.post<BaseProductResponse>(
         `${VITE_SERVER_URL}/products/base`,

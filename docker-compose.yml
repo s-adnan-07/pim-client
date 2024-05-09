@@ -3,6 +3,8 @@ services:
   pim-client:
     container_name: pim-client
     build: ./
+    env_file:
+      - .env.production
     ports:
       - '8080:80'
     restart: always

@@ -12,6 +12,7 @@ import GridStack from '@/ui/GridStack'
 import Dimensions from '@/components/Dimensions'
 import useProduct from '@/hooks/useProduct'
 import Stocks from '@/components/Stocks'
+import { Helmet } from 'react-helmet-async'
 
 type Props = {}
 
@@ -19,6 +20,17 @@ type Props = {}
 
 function Home({}: Props) {
   const { prod, loading } = useProduct()
+
+  if (loading) {
+    return (
+      <Grid container spacing={3} py={3}>
+        <GridStack>
+          <Skeleton variant="rectangular" height="20vh" />
+          <Skeleton variant="rectangular" height="55vh" />
+        </GridStack>
+      </Grid>
+    )
+  }
 
   if (!prod) return <div>Product Not Found</div>
 
@@ -37,38 +49,38 @@ function Home({}: Props) {
     stocks,
   } = prod
 
-  return loading ? (
-    <Grid container spacing={3} py={3}>
-      <GridStack>
-        <Skeleton variant="rectangular" height="20vh" />
-        <Skeleton variant="rectangular" height="55vh" />
-      </GridStack>
-    </Grid>
-  ) : (
-    <Grid container spacing={3} py={3}>
-      <GridStack>
-        <Title
-          model={model}
-          brand={brand}
-          searchTitle={searchTitle}
-          category={category}
-          soloCategory={soloCategory}
-        />
-        <Carousel images={s3Images} />
-      </GridStack>
+  return (
+    <>
+      <Helmet>
+        <title>
+          {brand} {model} - {searchTitle}
+        </title>
+      </Helmet>
+      <Grid container spacing={3} py={3}>
+        <GridStack>
+          <Title
+            model={model}
+            brand={brand}
+            searchTitle={searchTitle}
+            category={category}
+            soloCategory={soloCategory}
+          />
+          <Carousel images={s3Images} />
+        </GridStack>
 
-      <GridStack md={8}>
-        <Features features={features} />
-        <Specifications specification={specification} />
-      </GridStack>
+        <GridStack md={8}>
+          <Features features={features} />
+          <Specifications specification={specification} />
+        </GridStack>
 
-      <GridStack md={4}>
-        <Prices price={price} />
-        <ItemsIncluded items={whats_included} />
-        <Stocks stocks={stocks} />
-        <Dimensions package_dimension={package_dimension} />
-      </GridStack>
-    </Grid>
+        <GridStack md={4}>
+          <Prices price={price} />
+          <ItemsIncluded items={whats_included} />
+          <Stocks stocks={stocks} />
+          <Dimensions package_dimension={package_dimension} />
+        </GridStack>
+      </Grid>
+    </>
   )
 }
 
