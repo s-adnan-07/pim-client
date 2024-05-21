@@ -16,6 +16,7 @@ $ docker compose up --build
 - [ ] Button to update details on platforms
 - [ ] Download link to product documents
 - [ ] Image slider
+- [ ] User Login
 
 ## TODO (not features)
 
@@ -23,6 +24,8 @@ $ docker compose up --build
 - [ ] Add dynamic dimension units
 - [x] Add Category information/breadcrumbs
 - [ ] Left and right navigation buttons on image zoom
+- [x] Stocks display
+- [x] Dynamic title for product page
 
 ## Tweaks and Improvements
 
