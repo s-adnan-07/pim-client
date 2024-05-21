@@ -9,11 +9,11 @@ type Props = {
   brand: string
   model: string
   searchTitle: string
-  category: Category[]
+  category?: Category[]
   soloCategory: Category
 }
 
-function Title({ brand, model, searchTitle, category, soloCategory }: Props) {
+function Title({ brand, model, searchTitle, soloCategory }: Props) {
   // Dumb cookie monster put category field as an array of documents 🤦‍♂️
   // Therefore I have to extract the category document from the array with type assertion
 
