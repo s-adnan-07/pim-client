@@ -52,14 +52,14 @@ interface Product {
   brand: string
   searchTitle: string
   s3Images: S3Image[]
-  features: string[]
-  specification: Specification[]
+  features?: string[]
+  specification?: Specification[]
   price: Price
-  whats_included: string[]
+  whats_included?: string[]
   package_dimension: Dimension
   category: Category[]
   soloCategory: Category
-  stocks: Stock[]
+  stocks?: Stock[]
 }
 
 export default Product

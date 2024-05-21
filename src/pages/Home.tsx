@@ -44,7 +44,6 @@ function Home({}: Props) {
     price,
     whats_included,
     package_dimension,
-    category,
     soloCategory,
     stocks,
   } = prod
@@ -62,21 +61,20 @@ function Home({}: Props) {
             model={model}
             brand={brand}
             searchTitle={searchTitle}
-            category={category}
             soloCategory={soloCategory}
           />
           <Carousel images={s3Images} />
         </GridStack>
 
         <GridStack md={8}>
-          <Features features={features} />
-          <Specifications specification={specification} />
+          {features && <Features features={features} />}
+          {specification && <Specifications specification={specification} />}
         </GridStack>
 
         <GridStack md={4}>
           <Prices price={price} />
-          <ItemsIncluded items={whats_included} />
-          <Stocks stocks={stocks} />
+          {whats_included && <ItemsIncluded items={whats_included} />}
+          {stocks && <Stocks stocks={stocks} />}
           <Dimensions package_dimension={package_dimension} />
         </GridStack>
       </Grid>
