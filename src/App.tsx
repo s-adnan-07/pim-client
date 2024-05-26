@@ -5,13 +5,18 @@ import './App.css'
 import Layout from './ui/Layout'
 import Home from './pages/Home'
 import SearchPage from './pages/SearchPage'
+import LoginPage from './pages/LoginPage'
+import PrivateRoutes from './ui/PrivateRoutes'
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/product/:itemId" element={<Home />} />
-        <Route path="/" element={<SearchPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/product/:itemId" element={<Home />} />
+          <Route path="/" element={<SearchPage />} />
+        </Route>
       </Routes>
     </Layout>
   )
