@@ -1,61 +1,51 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type Props = { children: React.ReactNode; storageKey?: string }
-type AuthState = {
-  user: string | null
-  token: string | null
-  isLoggedIn: boolean
+type Props = {
+  children: React.ReactNode
 }
 
-const initialState: AuthState = {
+type User = string | null
+
+type Authstate = {
+  user: User
+  setUser: (user: User | (() => User)) => void
+}
+
+const initialState: Authstate = {
   user: null,
-  token: null,
-  isLoggedIn: false,
+  setUser: () => null,
 }
 
-export const AuthContext = createContext<AuthState>(initialState)
+const AuthContext = createContext<Authstate>(initialState)
 
-function AuthProvider({ children }: Props) {
-  // * There are two ways to store user and token in local storage
-  /*
-    user = {
-      user,
-      token
-    }
+export function AuthProvider({ children }: Props) {
+  const [user, setUser] = useState(() => localStorage.getItem('user'))
 
-    or
-
-    user = user
-    token = token
-  */
-
-  // The below state variables will be available throughout the app
-  // That is the point of context, simple react states made global
-  const [user, setUser] = useState<string | null>(null)
-  const [token, setToken] = useState<string | null>(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  // TODO: Add logic to sign in user here
-
+  // This is needed for auto redirect after login
+  // If someone tries to set user value from dev tools
+  // then tries to logout, this useEffect wont run
   useEffect(() => {
-    const user = localStorage.getItem('pim-user')
-    const token = localStorage.getItem('token')
-
-    if (user && token) {
-      setUser(user)
-      setToken(token)
+    if (user) {
+      localStorage.setItem('user', user)
+    } else {
+      localStorage.removeItem('user')
     }
-  }, [])
+  }, [user])
 
-  const authState: AuthState = {
+  const auth: Authstate = {
     user,
-    token,
-    isLoggedIn,
+    setUser,
   }
 
-  return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 
-export default AuthProvider
+export function useAuth() {
+  const auth = useContext(AuthContext)
+
+  if (auth === undefined) {
+    throw new Error('Must be used in AuthProvider')
+  }
+
+  return auth
+}
