@@ -1,4 +1,3 @@
-import useLogin from '@/hooks/useLogin'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
@@ -6,9 +5,10 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
+import useLogin from '@/hooks/useLogin'
+
 function LoginPage() {
-  const { loginDetails, handleUsername, handlePassword, handleSubmit } =
-    useLogin()
+  const { handleUsername, handlePassword, handleSubmit } = useLogin()
 
   return (
     // TODO: See if we can get 'xs' width without container
