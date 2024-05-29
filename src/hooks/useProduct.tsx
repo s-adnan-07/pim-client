@@ -1,48 +1,37 @@
-import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import { QueryFunction, useQuery } from '@tanstack/react-query'
 
 import Product from '@/types/product.model'
 import { VITE_SERVER_URL } from '@/constants/constants'
 
 interface ProductResponse {
-  status: number
   product: Product
 }
 
 function useProduct() {
   const params = useParams<{ itemId: string }>()
-  const [prod, setProd] = useState<Product | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
 
-  function handleError(e: unknown) {
-    if (e instanceof AxiosError) {
-      return setError(e.response?.data ?? 'Internal Server Error')
-    }
+  // TODO: Handle errors
+  const fetchProduct: QueryFunction<Product, string[], never> = async ({
+    queryKey,
+  }) => {
+    const [_, itemId] = queryKey
+    const { data } = await axios.get<ProductResponse>(
+      `${VITE_SERVER_URL}/products/by-id/${itemId}`,
+      { withCredentials: true },
+    )
 
-    if (e instanceof Error) {
-      return setError(e.message)
-    }
-
-    return setError('An Error Occured')
+    return data.product
   }
 
-  // TODO: use the error object in the Home Page
-  useEffect(() => {
-    axios
-      .get<ProductResponse>(
-        `${VITE_SERVER_URL}/products/by-id/${params.itemId}`,
-      )
-      .then(result => setProd(result.data.product))
-      .catch(e => handleError(e))
-      .finally(() => setLoading(false))
-  }, [])
+  const { data, isLoading } = useQuery({
+    queryKey: ['products', params.itemId as string],
+    queryFn: fetchProduct,
+    retry: false,
+  })
 
-  // Todo: Need to check why the below line fires before useeffect completes
-  // if (!prod) throw new Error('Product doesnt exist')
-
-  return { prod, error, loading }
+  return { prod: data, isLoading }
 }
 
 export default useProduct
