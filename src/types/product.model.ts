@@ -57,9 +57,10 @@ interface Product {
   price: Price
   whats_included?: string[]
   package_dimension: Dimension
-  category: Category[]
+  category?: Category[]
   soloCategory: Category
   stocks?: Stock[]
+  warranty?: string
 }
 
 export default Product

@@ -1,6 +1,6 @@
 services:
   pim-client:
-    image: pim-client
+    image: pim-client:2.0.0
     container_name: pim-client
     build: ./
     env_file:
