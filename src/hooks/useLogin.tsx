@@ -1,3 +1,4 @@
+import { SnackbarCloseReason } from '@mui/material/Snackbar'
 import { VITE_SERVER_URL } from '@/constants/constants'
 import { useAuth } from '@/contexts/AuthContext'
 import axios from 'axios'
@@ -28,6 +29,9 @@ const initialState: LoginDetails = {
 function useLogin() {
   // TODO: Disable login button while waiting for query to resolve
   const [loginDetails, setLoginDetails] = useState<LoginDetails>(initialState)
+  const [content, setContent] = useState('Default Error')
+  const [open, setOpen] = useState(false)
+
   const navigate = useNavigate()
   const { setUser } = useAuth()
 
@@ -49,10 +53,15 @@ function useLogin() {
   function handleErrors(e: unknown) {
     if (axios.isAxiosError(e)) {
       console.error(e.response?.data)
-      return
+      setContent(e.response?.data.message ?? 'Axios Error')
+    } else if (e instanceof Error) {
+      console.log(e)
+      setContent(e.message)
+    } else {
+      console.log(e)
+      setContent('Error Occured')
     }
-
-    console.error(e)
+    setOpen(true)
   }
 
   // TODO: Add delay before redirect and message
@@ -95,12 +104,25 @@ function useLogin() {
     }
   }
 
+  function handleClose(
+    e: React.SyntheticEvent | Event,
+    reason: SnackbarCloseReason,
+  ) {
+    if (reason === 'clickaway') return
+    setOpen(false)
+  }
+
   return {
+    open,
+    content,
     loginDetails,
+    setOpen,
+    setContent,
     handleUsername,
     handlePassword,
     handleSubmit,
     handleLogout,
+    handleClose,
   }
 }
 

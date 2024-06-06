@@ -4,11 +4,19 @@ import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import Snackbar from '@mui/material/Snackbar'
 
 import useLogin from '@/hooks/useLogin'
 
 function LoginPage() {
-  const { handleUsername, handlePassword, handleSubmit } = useLogin()
+  const {
+    open,
+    content,
+    handleUsername,
+    handlePassword,
+    handleSubmit,
+    handleClose,
+  } = useLogin()
 
   return (
     // TODO: See if we can get 'xs' width without container
@@ -28,6 +36,12 @@ function LoginPage() {
           <Button type="submit" variant="contained" onClick={handleSubmit}>
             Login
           </Button>
+          <Snackbar
+            open={open}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            message={content}
+          />
         </Stack>
       </Paper>
     </Container>
