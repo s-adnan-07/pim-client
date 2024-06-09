@@ -26,9 +26,16 @@ function useSearch() {
     if (baseProduct?.model === model) return
 
     try {
+      const jwt = localStorage.getItem('jwt')
       const { data } = await axios.post<BaseProductResponse>(
         `${VITE_SERVER_URL}/products/base`,
         { model },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        },
       )
 
       setBaseProduct(data.product)
