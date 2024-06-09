@@ -13,6 +13,7 @@ type LoginDetails = {
 
 type ApiResponse = {
   user: string
+  token: string
 }
 
 type User = {
@@ -74,11 +75,12 @@ function useLogin() {
       const result = await axios.post<ApiResponse>(
         `${VITE_SERVER_URL}/auth/login`,
         loginDetails,
-        { withCredentials: true },
+        // { withCredentials: true },
       )
 
-      const { user } = result.data
+      const { user, token } = result.data
 
+      localStorage.setItem('token', token)
       setUser(() => user)
       navigate('/')
     } catch (e) {
@@ -92,12 +94,12 @@ function useLogin() {
     e.preventDefault()
 
     try {
-      await axios.post(
-        `${VITE_SERVER_URL}/auth/logout`,
-        {},
-        { withCredentials: true },
-      )
-
+      // await axios.post(
+      //   `${VITE_SERVER_URL}/auth/logout`,
+      //   {},
+      //   { withCredentials: true },
+      // )
+      localStorage.removeItem('token')
       setUser(() => null)
     } catch (e) {
       handleErrors(e)

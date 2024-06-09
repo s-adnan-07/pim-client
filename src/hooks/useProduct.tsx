@@ -16,10 +16,12 @@ function useProduct() {
   const fetchProduct: QueryFunction<Product, string[], never> = async ({
     queryKey,
   }) => {
+    const token = localStorage.getItem('token')
     const [_, itemId] = queryKey
     const { data } = await axios.get<ProductResponse>(
       `${VITE_SERVER_URL}/products/by-id/${itemId}`,
-      { withCredentials: true },
+      // { withCredentials: true },
+      { headers: { Authorization: `Bearer ${token}` } },
     )
 
     return data.product

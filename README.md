@@ -16,7 +16,7 @@ $ docker compose up --build
 - [ ] Button to update details on platforms
 - [ ] Download link to product documents
 - [ ] Image slider
-- [ ] User Login
+- [x] User Login
 
 ## TODO (not features)
 

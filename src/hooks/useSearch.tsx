@@ -26,9 +26,11 @@ function useSearch() {
     if (baseProduct?.model === model) return
 
     try {
+      const token = localStorage.getItem('token')
       const { data } = await axios.post<BaseProductResponse>(
         `${VITE_SERVER_URL}/products/base`,
         { model },
+        { headers: { Authorization: `Bearer ${token}` } },
       )
 
       setBaseProduct(data.product)
