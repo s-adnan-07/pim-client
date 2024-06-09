@@ -11,9 +11,10 @@ type Props = {
   searchTitle: string
   category?: Category[]
   soloCategory: Category
+  warranty?: string
 }
 
-function Title({ brand, model, searchTitle, soloCategory }: Props) {
+function Title({ brand, model, searchTitle, soloCategory, warranty }: Props) {
   // Dumb cookie monster put category field as an array of documents 🤦‍♂️
   // Therefore I have to extract the category document from the array with type assertion
 
@@ -31,7 +32,12 @@ function Title({ brand, model, searchTitle, soloCategory }: Props) {
   const categories = breadCrumbs.replace(/^\//, '').split('/')
 
   return (
-    <Paper>
+    <Paper
+      component={Box}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+    >
       <Typography variant="h6" component="p" align="center">
         {brand} {model}
       </Typography>
@@ -40,14 +46,13 @@ function Title({ brand, model, searchTitle, soloCategory }: Props) {
         {searchTitle}
       </Typography>
 
-      {/* The breadcrumbs are wrapper in a flexbox to center them */}
-      <Box display="flex" justifyContent="center" mt={2}>
-        <Breadcrumbs>
-          {categories.map(cat => (
-            <Typography>{cat}</Typography>
-          ))}
-        </Breadcrumbs>
-      </Box>
+      <Breadcrumbs sx={{ mt: 2 }}>
+        {categories.map(cat => (
+          <Typography>{cat}</Typography>
+        ))}
+      </Breadcrumbs>
+
+      {warranty && <Typography mt={1}>Warranty - {warranty}</Typography>}
     </Paper>
   )
 }

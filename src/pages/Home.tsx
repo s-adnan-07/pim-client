@@ -40,6 +40,7 @@ function Home() {
     package_dimension,
     soloCategory,
     stocks,
+    warranty,
   } = prod
 
   return (
@@ -56,6 +57,7 @@ function Home() {
             brand={brand}
             searchTitle={searchTitle}
             soloCategory={soloCategory}
+            warranty={warranty}
           />
           <Carousel images={s3Images} />
         </GridStack>
