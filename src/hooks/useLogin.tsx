@@ -1,11 +1,12 @@
+import axios, { AxiosError } from 'axios'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+
 import { SnackbarCloseReason } from '@mui/material/Snackbar'
 import { VITE_SERVER_URL } from '@/constants/constants'
 import { useAuth } from '@/contexts/AuthContext'
-import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-type Props = {}
 type LoginDetails = {
   username: string
   password: string
@@ -15,6 +16,10 @@ type ApiResponse = {
   user: string
   token: string
 }
+
+type ErrorMessage = { message: string }
+
+type ErrorResponse = AxiosError<ErrorMessage>
 
 type User = {
   name: string
@@ -36,6 +41,21 @@ function useLogin() {
   const navigate = useNavigate()
   const { setUser } = useAuth()
 
+  const { refetch, isLoading } = useQuery<ApiResponse, ErrorResponse>({
+    queryKey: ['login'],
+    queryFn: sendCredentials,
+    retry: false,
+    enabled: false,
+  })
+
+  async function sendCredentials() {
+    const { data } = await axios.post<ApiResponse>(
+      `${VITE_SERVER_URL}/auth/login`,
+      loginDetails,
+    )
+    return data
+  }
+
   function handleUsername(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
@@ -50,42 +70,33 @@ function useLogin() {
     setLoginDetails(loginDetails => ({ ...loginDetails, password }))
   }
 
-  // TODO: Need to display failed login
-  function handleErrors(e: unknown) {
-    if (axios.isAxiosError(e)) {
-      console.error(e.response?.data)
-      setContent(e.response?.data.message ?? 'Axios Error')
-    } else if (e instanceof Error) {
-      console.log(e)
-      setContent(e.message)
-    } else {
-      console.log(e)
-      setContent('Error Occured')
-    }
-    setOpen(true)
-  }
-
   // TODO: Add delay before redirect and message
   async function handleSubmit(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     e.preventDefault()
 
-    try {
-      const result = await axios.post<ApiResponse>(
-        `${VITE_SERVER_URL}/auth/login`,
-        loginDetails,
-        // { withCredentials: true },
-      )
+    const { data, error } = await refetch()
 
-      const { user, token } = result.data
+    if (error) return handleErrors(error)
+    if (!data) return
 
-      localStorage.setItem('token', token)
-      setUser(() => user)
-      navigate('/')
-    } catch (e) {
-      handleErrors(e)
+    const { user, token } = data
+    localStorage.setItem('token', token)
+    setUser(() => user)
+    navigate('/')
+  }
+
+  // // Need to display failed login
+  function handleErrors(error: ErrorResponse) {
+    let { message, response } = error
+    if (response) {
+      message = response.data.message
     }
+
+    console.dir(error)
+    setContent(() => message)
+    setOpen(() => true)
   }
 
   async function handleLogout(
@@ -93,17 +104,18 @@ function useLogin() {
   ) {
     e.preventDefault()
 
-    try {
-      // await axios.post(
-      //   `${VITE_SERVER_URL}/auth/logout`,
-      //   {},
-      //   { withCredentials: true },
-      // )
-      localStorage.removeItem('token')
-      setUser(() => null)
-    } catch (e) {
-      handleErrors(e)
-    }
+    localStorage.removeItem('token')
+    setUser(() => null)
+
+    // try {
+    //   await axios.post(
+    //     `${VITE_SERVER_URL}/auth/logout`,
+    //     {},
+    //     { withCredentials: true },
+    //   )
+    // } catch (e) {
+    //   handleErrors(e)
+    // }
   }
 
   function handleClose(
@@ -118,6 +130,7 @@ function useLogin() {
     open,
     content,
     loginDetails,
+    isLoading,
     setOpen,
     setContent,
     handleUsername,

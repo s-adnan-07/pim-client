@@ -32,3 +32,6 @@ $ docker compose up --build
 - [x] Add Thousands seperator in prices
 - [ ] Update font family and size
 - [ ] Update color palette
+- [ ] Handle button spam clicks
+- [x] Loading screen on login
+- [ ] Alerts on errors
