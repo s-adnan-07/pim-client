@@ -15,7 +15,7 @@ $ docker compose up --build
 - [ ] Links to maintive, aabtools & gazelle listings
 - [ ] Button to update details on platforms
 - [ ] Download link to product documents
-- [ ] Image slider
+- [x] Image slider
 - [x] User Login
 
 ## TODO (not features)
