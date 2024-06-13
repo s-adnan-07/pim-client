@@ -90,7 +90,7 @@ function SearchPage({}: Props) {
                 <TableCell>
                   {/* <Link>{product.model}</Link> */}
                   <RouterLink
-                    to={`/product/${baseProduct.itemId}`}
+                    to={`/products/${baseProduct.itemId}`}
                     target="_blank"
                   >
                     {baseProduct.model}
