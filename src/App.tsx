@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="/product/:itemId" element={<Home />} />
+          <Route path="/products/:itemId" element={<Home />} />
           <Route path="/" element={<SearchPage />} />
         </Route>
       </Routes>
