@@ -45,7 +45,7 @@ function Carousel({ images }: Props) {
           550: { slidesPerView: 2 },
         }}
         modules={[Scrollbar, Mousewheel]}
-        mousewheel={{ enabled: true }}
+        mousewheel={{ enabled: true, releaseOnEdges: true }}
         scrollbar={{ draggable: true, hide: true }}
         slidesPerView={1}
         style={{ marginLeft: 24, marginRight: 24 }}
