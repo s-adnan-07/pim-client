@@ -17,6 +17,7 @@ $ docker compose up --build
 - [ ] Download link to product documents
 - [x] Image slider
 - [x] User Login
+- [x] Search with partial match
 
 ## TODO (not features)
 

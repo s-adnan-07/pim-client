@@ -24,28 +24,22 @@ type Props = {}
 // * If exists, API returns with product document
 // * Maybe include search in the navbar
 
-function SearchPage({}: Props) {
+function SearchPage() {
   const {
     open,
     content,
     model,
-    baseProduct,
+    baseProducts,
+    isLoading,
     setModel,
-    getBaseProduct,
-    setBaseProduct,
     handleClose,
     handleEnterKey,
+    handleSubmit,
+    handleClear,
   } = useSearch()
 
-  function handleClear() {
-    // if (open) setOpen(false)
-    // setTimeout(() => setModel(''), 50)
-    setModel('')
-    setBaseProduct(null)
-  }
-
   return (
-    <Stack mt={20}>
+    <Stack mt={20} mb={5}>
       <Paper
         component="form"
         sx={{ display: 'flex', alignItems: 'center', px: 1 }}
@@ -61,17 +55,17 @@ function SearchPage({}: Props) {
         />
 
         {model && (
-          <IconButton onClick={handleClear} size="small">
+          <IconButton onClick={handleClear} size="small" disabled={isLoading}>
             <CloseIcon fontSize="small" />
           </IconButton>
         )}
 
-        <IconButton onClick={getBaseProduct}>
+        <IconButton onClick={handleSubmit} disabled={isLoading}>
           <SearchIcon />
         </IconButton>
       </Paper>
 
-      {baseProduct && (
+      {baseProducts && (
         <TableContainer component={Paper} sx={{ p: 0 }}>
           <Table>
             <TableHead sx={{ bgcolor: 'black' }}>
@@ -83,21 +77,23 @@ function SearchPage({}: Props) {
             </TableHead>
 
             <TableBody>
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell>{baseProduct.brand}</TableCell>
-                <TableCell>
-                  {/* <Link>{product.model}</Link> */}
-                  <RouterLink
-                    to={`/products/${baseProduct.itemId}`}
-                    target="_blank"
-                  >
-                    {baseProduct.model}
-                  </RouterLink>
-                </TableCell>
-                <TableCell>{baseProduct.searchTitle}</TableCell>
-              </TableRow>
+              {baseProducts.map(baseProduct => (
+                <TableRow
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell>{baseProduct.brand}</TableCell>
+                  <TableCell>
+                    {/* <Link>{product.model}</Link> */}
+                    <RouterLink
+                      to={`/products/${baseProduct.itemId}`}
+                      target="_blank"
+                    >
+                      {baseProduct.model}
+                    </RouterLink>
+                  </TableCell>
+                  <TableCell>{baseProduct.searchTitle}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
