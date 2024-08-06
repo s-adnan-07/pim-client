@@ -4,6 +4,11 @@ export interface S3Image {
   source?: string
 }
 
+export interface S3Document {
+  fileType: string
+  url: string
+}
+
 export interface Specification {
   _id?: any
   attribute: string
@@ -52,6 +57,7 @@ interface Product {
   brand: string
   searchTitle: string
   s3Images: S3Image[]
+  s3Documents: S3Document[]
   features?: string[]
   specification?: Specification[]
   price: Price

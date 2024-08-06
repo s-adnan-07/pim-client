@@ -6,6 +6,8 @@ const defaultTheme = createTheme({
     MuiPaper: { defaultProps: { elevation: 12, sx: { p: 2 } } },
     MuiStack: { defaultProps: { spacing: 3 } },
     MuiGrid2: { defaultProps: { xs: 12 } },
+    MuiTab: { defaultProps: { iconPosition: 'end' } },
+    MuiButton: { defaultProps: { variant: 'contained' } },
   },
 })
 
