@@ -4,10 +4,10 @@ import { SnackbarCloseReason } from '@mui/material/Snackbar'
 function useSnackBar(snackBarContent?: string) {
   const [open, setOpen] = useState(false)
 
-  function handleClick() {
+  async function handleClick() {
     if (!snackBarContent) return
 
-    navigator.clipboard.writeText(snackBarContent)
+    await navigator.clipboard.writeText(snackBarContent)
     setOpen(true)
   }
 
