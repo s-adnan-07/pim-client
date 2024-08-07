@@ -1,3 +1,4 @@
+// import baseProducts from '@/assets/baseProducts'
 import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
 import Snackbar from '@mui/material/Snackbar'
@@ -14,10 +15,9 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import TableBody from '@mui/material/TableBody'
+import Button from '@mui/material/Button'
 
 import { Link as RouterLink } from 'react-router-dom'
-
-type Props = {}
 
 // Note: first implement search using only model
 // * Make API call with model
@@ -70,9 +70,10 @@ function SearchPage() {
           <Table>
             <TableHead sx={{ bgcolor: 'black' }}>
               <TableRow>
-                <TableCell sx={{ width: 1 / 5 }}>Brand</TableCell>
-                <TableCell sx={{ width: 1 / 5 }}>Model</TableCell>
-                <TableCell sx={{ width: 3 / 5 }}>SearchTitle</TableCell>
+                <TableCell sx={{ width: 1 / 8 }}>Brand</TableCell>
+                <TableCell sx={{ width: 1 / 8 }}>Model</TableCell>
+                <TableCell sx={{ width: 5 / 8 }}>SearchTitle</TableCell>
+                <TableCell sx={{ width: 1 / 8 }} />
               </TableRow>
             </TableHead>
 
@@ -83,15 +84,26 @@ function SearchPage() {
                 >
                   <TableCell>{baseProduct.brand}</TableCell>
                   <TableCell>
+                    {baseProduct.model}
                     {/* <Link>{product.model}</Link> */}
-                    <RouterLink
+                    {/* <RouterLink
                       to={`/products/${baseProduct.itemId}`}
                       target="_blank"
                     >
                       {baseProduct.model}
-                    </RouterLink>
+                    </RouterLink> */}
                   </TableCell>
                   <TableCell>{baseProduct.searchTitle}</TableCell>
+                  <TableCell>
+                    <Button
+                      component={RouterLink}
+                      to={`/products/${baseProduct.itemId}`}
+                      target="_blank"
+                      sx={{ textTransform: 'none' }}
+                    >
+                      View
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
