@@ -55,31 +55,33 @@ function Product() {
         </title>
       </Helmet>
 
-      <Grid container spacing={3} py={3}>
+      <Grid container spacing={3} mt={2}>
         <GridStack>
           <Title {...prod} />
-          <Carousel images={s3Images} />
+          {s3Images && <Carousel images={s3Images} />}
         </GridStack>
       </Grid>
 
       <Tabs value={tabValue} onChange={switchTabs}>
         <Tab label="Details" value={0} icon={<SubjectIcon />} />
-        <Tab
-          label="Documents"
-          value={1}
-          icon={
-            <Badge badgeContent={s3Documents.length} color="info">
-              <InsertDriveFileIcon />
-            </Badge>
-            // Note: Adding the above to a seperate component reduces space
-            // > Why?
-            // <DocumentsCount count={s3Documents.length} />
-          }
-        />
+        {s3Documents && (
+          <Tab
+            label="Documents"
+            value={1}
+            icon={
+              <Badge badgeContent={s3Documents.length} color="info">
+                <InsertDriveFileIcon />
+              </Badge>
+              // Note: Adding the above to a seperate component reduces space
+              // > Why?
+              // <DocumentsCount count={s3Documents.length} />
+            }
+          />
+        )}
       </Tabs>
 
       <div hidden={tabValue !== 0}>
-        <Grid container spacing={3} py={3} minHeight="100vh">
+        <Grid container spacing={3} my={2} minHeight="100vh">
           <GridStack md={8}>
             {features && <Features features={features} />}
             {specification && <Specifications specification={specification} />}
