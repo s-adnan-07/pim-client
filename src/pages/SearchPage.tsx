@@ -70,10 +70,10 @@ function SearchPage() {
           <Table>
             <TableHead sx={{ bgcolor: 'black' }}>
               <TableRow>
+                <TableCell sx={{ width: 1 / 8 }} />
                 <TableCell sx={{ width: 1 / 8 }}>Brand</TableCell>
                 <TableCell sx={{ width: 1 / 8 }}>Model</TableCell>
                 <TableCell sx={{ width: 5 / 8 }}>SearchTitle</TableCell>
-                <TableCell sx={{ width: 1 / 8 }} />
               </TableRow>
             </TableHead>
 
@@ -82,6 +82,16 @@ function SearchPage() {
                 <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell align="center">
+                    <Button
+                      component={RouterLink}
+                      to={`/products/${baseProduct.itemId}`}
+                      target="_blank"
+                      sx={{ textTransform: 'none' }}
+                    >
+                      View
+                    </Button>
+                  </TableCell>
                   <TableCell>{baseProduct.brand}</TableCell>
                   <TableCell>
                     {baseProduct.model}
@@ -94,16 +104,6 @@ function SearchPage() {
                     </RouterLink> */}
                   </TableCell>
                   <TableCell>{baseProduct.searchTitle}</TableCell>
-                  <TableCell>
-                    <Button
-                      component={RouterLink}
-                      to={`/products/${baseProduct.itemId}`}
-                      target="_blank"
-                      sx={{ textTransform: 'none' }}
-                    >
-                      View
-                    </Button>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
