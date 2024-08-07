@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 // import baseProducts from '@/assets/baseProducts'
 import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
@@ -16,8 +18,11 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import TableBody from '@mui/material/TableBody'
 import Button from '@mui/material/Button'
+import Backdrop from '@mui/material/Backdrop'
 
 import { Link as RouterLink } from 'react-router-dom'
+
+import dummy from '@/assets/dummy.jpg'
 
 // Note: first implement search using only model
 // * Make API call with model
@@ -25,6 +30,8 @@ import { Link as RouterLink } from 'react-router-dom'
 // * Maybe include search in the navbar
 
 function SearchPage() {
+  const [backDrop, setBackDrop] = useState(false)
+  const [url, setUrl] = useState('')
   const {
     open,
     content,
@@ -70,10 +77,13 @@ function SearchPage() {
           <Table>
             <TableHead sx={{ bgcolor: 'black' }}>
               <TableRow>
-                <TableCell sx={{ width: 1 / 8 }} />
-                <TableCell sx={{ width: 1 / 8 }}>Brand</TableCell>
-                <TableCell sx={{ width: 1 / 8 }}>Model</TableCell>
-                <TableCell sx={{ width: 5 / 8 }}>SearchTitle</TableCell>
+                <TableCell sx={{ width: 1 / 10 }} />
+                <TableCell sx={{ width: 1 / 10 }} align="center">
+                  Image
+                </TableCell>
+                <TableCell sx={{ width: 1 / 10 }}>Brand</TableCell>
+                <TableCell sx={{ width: 1 / 10 }}>Model</TableCell>
+                <TableCell sx={{ width: 5 / 10 }}>SearchTitle</TableCell>
               </TableRow>
             </TableHead>
 
@@ -91,6 +101,18 @@ function SearchPage() {
                     >
                       View
                     </Button>
+                  </TableCell>
+                  <TableCell align="center">
+                    <img
+                      src={baseProduct.thumbnail || dummy}
+                      height={60}
+                      onClick={() => {
+                        if (!baseProduct.thumbnail) return
+                        setUrl(baseProduct.thumbnail)
+                        setBackDrop(true)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    />
                   </TableCell>
                   <TableCell>{baseProduct.brand}</TableCell>
                   <TableCell>
@@ -117,6 +139,17 @@ function SearchPage() {
         onClose={handleClose}
         message={content}
       />
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+        open={backDrop}
+        onClick={() => {
+          setBackDrop(false)
+          setUrl('')
+        }}
+      >
+        <img src={url} height="90%" />
+      </Backdrop>
     </Stack>
   )
 }

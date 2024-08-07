@@ -50,14 +50,15 @@ export interface BaseProduct {
   searchTitle: string
   model: string
   brand: string
+  thumbnail?: string
 }
 
 interface Product {
   model: string
   brand: string
   searchTitle: string
-  s3Images: S3Image[]
-  s3Documents: S3Document[]
+  s3Images?: S3Image[]
+  s3Documents?: S3Document[]
   features?: string[]
   specification?: Specification[]
   price: Price
