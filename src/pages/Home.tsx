@@ -59,7 +59,7 @@ function Home() {
             soloCategory={soloCategory}
             warranty={warranty}
           />
-          <Carousel images={s3Images} />
+          <Carousel images={s3Images ?? []} />
         </GridStack>
 
         <GridStack md={8}>
